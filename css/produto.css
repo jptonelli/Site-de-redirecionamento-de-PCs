@@ -1,0 +1,33 @@
+.produto {
+    background-color: rgb(141, 138, 138);
+    width: 90%;
+    height: 60%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.img-produto {
+    width: 400px;
+    margin: 30px 0 0 100px;
+}
+
+.infos {
+    position: absolute;
+    top: 350px;
+    right: 250px;
+}
+
+h4 {
+    margin-left: 60px;
+}
+
+.btn {
+    background-color: aquamarine;
+   transition: all .5s;
+}
+
+.btn:hover {
+    background-color: rgb(61, 199, 153);
+}

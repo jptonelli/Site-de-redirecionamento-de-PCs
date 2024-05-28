@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Azeret Mono', sans-serif;
+}
+
+.main {
+    background: rgb(12,13,16);
+    background: linear-gradient(180deg, rgba(12,13,16,1) 2%, rgba(26,27,29,0.9766281512605042) 12%);
+    display: flex;
+    flex-direction: column;
+}
+
+.box-busca {
+    width: 100%;
+    height: 10vh;
+}
+
+.promocional {
+    display: flex;
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.promocao {
+    width: 50%;
+    padding: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carrossel {
+    height: 350px;
+    width: 830px;
+}
+
+.img {
+    width: 100px;
+    margin-left: 180px;
+}
+
+.footer {
+    background: rgb(26,27,29);
+    background: linear-gradient(180deg, rgba(26,27,29,0.9766281512605042) 75%, rgba(12,13,16,1) 97%);
+    height: 50vh;
+}
+
+
+.patrocinadores {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 250px;
+}
+
+.patrocinadores h4 {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.patrocinadores h4:hover {
+    color: #6F86FF;
+    border-bottom: 1px solid #6F86FF;
+    font-size: 2rem;
+    transition: all .5s;
+}
+
+.contato {
+    display: block;
+    text-align: center;
+    margin-top: 70px;
+    color: #fff;
+}
+
+.contato a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.contato a:hover{
+    text-decoration: none;
+    color: #6F86FF;
+    transition: all .5s;
+}
+
+.whatsapp-button {
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
+    background-color:#25d366;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    font-size:30px;
+    box-shadow: 1px 1px 2px #888;
+    z-index:1000;
+}
+
+#a {
+    position: relative;
+    display: inline-block;
+}
+
+.menu {
+    position: absolute;
+    top: 50px; /* Ajuste conforme necessário */
+    right: 10px;
+    width: 100;
+    background-color: #281f36;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    padding: 12px 16px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu ul li a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+}
+
+.user-img {
+    width: 50px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}

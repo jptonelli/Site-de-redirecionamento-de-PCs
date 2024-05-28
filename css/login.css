@@ -1,0 +1,75 @@
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login {
+    background-color: rgb(28, 29, 29);
+    width: 30%;
+    height: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 150px;
+    position: absolute;
+    left: 150px;
+}
+
+.login label{
+    color: #fff;
+}
+
+.login h6 {
+    color: #fff;
+}
+
+.cadastro {
+    background-color: rgb(28, 29, 29);;
+    width: 30%;
+    height: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 150px;
+    position: absolute;
+    right: 150px;
+}
+
+.cadastro h6 {
+    color: #fff;
+}
+
+h4, h6 {
+    text-align: center;
+}
+
+.title{
+    color: #fff;
+}
+
+.form {
+    margin: 25px;
+}
+
+.button {
+    margin-left: 55px;
+    margin-top: 25px;
+}
+
+/* Animating the letters */
+.letter {
+    opacity: 0;
+    animation: appear 0.8s ease forwards;
+}
+  
+@keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}

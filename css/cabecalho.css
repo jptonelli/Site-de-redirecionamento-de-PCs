@@ -1,0 +1,44 @@
+#cabecalho {
+    width: 100%;
+    height: 8vh;
+    background-color:#0b0c10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    z-index: 1;
+}
+
+.links {
+    display: flex;
+    gap: 5px;
+}
+
+.links ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+    margin-right: 45px;
+}
+
+.links ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.links ul li a:hover{
+    color: aquamarine;
+    border-bottom: 1px solid aquamarine;
+    transition: all .5s;
+}
+
+.acessibilidade {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+}
