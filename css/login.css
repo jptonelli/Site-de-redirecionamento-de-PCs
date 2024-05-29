@@ -53,8 +53,9 @@ h4, h6 {
 }
 
 .button {
-    margin-left: 55px;
-    margin-top: 25px;
+    position: absolute;
+    bottom: 25px;
+    left: 97px;
 }
 
 /* Animating the letters */

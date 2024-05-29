@@ -94,7 +94,7 @@ nav {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.button {
+.button, .button2 {
     background-color: #6F86FF;
     color: #ffffff;
     margin: auto;
