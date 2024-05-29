@@ -1,0 +1,80 @@
+Usuario:
+id_usu - primary key - int - auto incremento
+nome - Varchar
+usuario - Varchar
+senha - Varchar
+CPF - Varchar
+email - Varchar
+data de nascimento - date
+hierarquia - int(1)
+
+CREATE TABLE usuarios (
+    id_usu INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255),
+    usuario VARCHAR(255),
+    senha VARCHAR(255),
+    CPF VARCHAR(14),
+    email VARCHAR(255),
+    data_de_nascimento DATE,
+    hierarquia INT(1)
+);
+
+
+
+
+Produtos:
+id_prod - primary key - int - auto incremento
+imagem - imagem
+id_usu - FK - int
+descricao - varchar
+nome_prod - varchar
+tipo - varchar
+preco - monetario
+link_produto - varchar
+opcao_pagamento - varchar
+
+
+CREATE TABLE produtos (
+    id_prod INT AUTO_INCREMENT PRIMARY KEY,
+    imagem BLOB,
+    id_usu INT,
+    descricao VARCHAR(255),
+    nome_prod VARCHAR(255),
+    tipo VARCHAR(255),
+    preco DECIMAL(10, 2),
+    link_produto VARCHAR(255),
+    opcao_pagamento VARCHAR(255),
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id_usu)
+);
+
+
+
+GERAL:
+
+CREATE DATABASE Site;
+
+USE Site;
+
+CREATE TABLE usuarios (
+    id_usu INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255),
+    usuario VARCHAR(255),
+    senha VARCHAR(255),
+    CPF VARCHAR(14),
+    email VARCHAR(255),
+    data_de_nascimento DATE,
+    hierarquia INT(1)
+);
+
+CREATE TABLE produtos (
+    id_prod INT AUTO_INCREMENT PRIMARY KEY,
+    imagem BLOB,
+    id_usu INT,
+    descricao VARCHAR(255),
+    nome_prod VARCHAR(255),
+    tipo VARCHAR(255),
+    preco DECIMAL(10, 2),
+    link_produto VARCHAR(255),
+    opcao_pagamento VARCHAR(255),
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id_usu)
+);
