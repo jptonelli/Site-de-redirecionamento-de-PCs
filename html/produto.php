@@ -55,5 +55,28 @@
             </div>
         </div>
     </div>
+    <div class="footer">
+    <div class="patrocinadores">
+      <h4>Accenture</h4>
+      <h4>Positivo</h4>
+      <h4>Dell</h4>
+      <h4>Claro</h4>
+      <h4>Telnet</h4>
+    </div>
+
+    <hr>
+
+    <div class="contato" id="contato">
+      <a target="_blank"
+        href="https://accounts.google.com/AccountChooser/signinchooser?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=AccountChooser&ec=asw-gmail-globalnav-signin&theme=mn&ddm=0">contato@email.com</a><br>
+      <a target="_blank" href="https://web.whatsapp.com/">(14)99999-9999</a>
+
+      <!-- LIBERAR QUANDO O USUÁRIO FOR ADMIN -->
+      <a target="_blank" class="whatsapp-button" href="https://wa.me/5514991334662?text=Adorei%20seu%20artigo">
+        <i style="margin-top:16px" class="fa fa-whatsapp"></i>
+      </a>
+      <p>Todos os Direitos Reservados &#9400</p>
+    </div>
+  </div>
 </body>
 </html>

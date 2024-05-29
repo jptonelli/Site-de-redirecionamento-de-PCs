@@ -47,20 +47,26 @@
     </nav>
   </div>
   
+  
   <div class="main" id="home">
     <div class="box-busca">
       <div class="search-box">
         <form method="GET" action="buscaProduto.php">
           <input type="text" class="search-box-input" name="busca" placeholder="Faça sua Pesquisa">
           <button class="search-box-button"><!--<i class="search-box-icone icon icon-search"></i>--> <img
-              src="/Site-de-redirecionamento-de-PCs/img/lupa.png" alt=""></button>
+          src="/Site-de-redirecionamento-de-PCs/img/lupa.png" alt=""></button>
         </form>
       </div>
+    </div>
+    
+    <div class="slogan" id="slogan">
+      <h3 class="slogan-frase">Procure pelo seu PC e encontre os melhores preços</h3>
     </div>
 
     <div class="promocional">
       <img src="/Site-de-redirecionamento-de-PCs/img/promo.jpg" alt="promoção" class="promocao">
     </div>
+
 
     <div class="container">
       <div id="mCarousel" class="carrossel carousel slide" data-ride="carousel">

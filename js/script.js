@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    const userIcon = document.getElementById('user-icon');
+    const userIcon = document.getElementById('user-img');
     const menu = document.getElementById('menu');
 
     userIcon.addEventListener('click', function(event) {

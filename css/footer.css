@@ -1,0 +1,42 @@
+.footer {
+    background: rgb(26,27,29);
+    background: linear-gradient(180deg, rgba(26,27,29,0.9766281512605042) 75%, rgba(12,13,16,1) 97%);
+}
+
+
+.patrocinadores {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 250px;
+}
+
+.patrocinadores h4 {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.patrocinadores h4:hover {
+    color: #6F86FF;
+    border-bottom: 1px solid #6F86FF;
+    font-size: 2rem;
+    transition: all .5s;
+}
+
+.contato {
+    display: block;
+    text-align: center;
+    margin-top: 70px;
+    color: #fff;
+}
+
+.contato a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.contato a:hover{
+    text-decoration: none;
+    color: #6F86FF;
+    transition: all .5s;
+}

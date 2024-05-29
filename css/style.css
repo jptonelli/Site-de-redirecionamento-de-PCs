@@ -154,3 +154,30 @@ html {
     top: 20px;
     left: 20px;
 }
+
+.slogan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.slogan-frase {
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-shadow: #6F86FF 0.2em 0.2em 0.3em;
+    opacity: 0;
+    animation: appear 0.8s ease forwards;
+}
+
+@keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
