@@ -24,7 +24,7 @@
             <p style="color: #6F86FF;">Chip <span style="color: #fff;">Chase</span></p>
         </div>
         <div class="off-screen-menu">
-            <a href="#">
+            <a href="editaProduto.php">
                 <img class="user-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAQlJREFUSEvVlb0RgzAMRj9tkmwCm4QJoIUUCQ20kAXIJmEUNlFOd5gTBIzNTxE6OPs960O2CSc/dDIfhwnikhsGuldKuV70SJCUHDCjAXCxVUaEsEqpNWMEDsZN3pnw1JKRIC74AyDwgSclX5gh84ZFaclUwAKvM3KKTuBVSt1UQoyoutNbWJsFfSxBH9cgIUZu4JsFOnMAnZHMRetdwQRumF2d0XW3YAEOnflU4lyBK1xaXbewk8AHLi2ru3BV4AqXaOKCf9p8XdBPGm1/1ef6+yEC2w/dLbDBN0fkc5xvquDvBKvHtUNFbZ1RaMbNXTiPtTvBIpGDL1rcyQ6r8x7idLF4U9WE0wVfheXhGWIwFvcAAAAASUVORK5CYII="/>
               </a>
 
