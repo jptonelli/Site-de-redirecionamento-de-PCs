@@ -1,0 +1,49 @@
+<?php
+
+    $id = $_GET["id"];
+
+    $con = new mysqli("127.0.0.1",
+                        "root",
+                        "",
+                        "aula07");
+
+    $sql = "SELECT * FROM login WHERE id=$id";
+
+    $rs = $con->query($sql);
+    $dados = $rs->fetch_assoc();
+
+    //echo $dados["usuario"];
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="margin-top: 250px;">
+        <form method="POST" action="login_alterar_salvar.php">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" name="id" value="<?php echo $dados["id"]; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="usuario">Usuário</label>
+                <input type="text" class="form-control" name="usuario" value="<?php echo $dados["usuario"]; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" name="senha" value="<?php echo $dados["senha"]; ?>">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
