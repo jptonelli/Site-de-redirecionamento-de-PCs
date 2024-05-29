@@ -23,16 +23,16 @@
       <p style="color: #6F86FF;">Chip <span style="color: #fff;">Chase</span></p>
     </div>
     <div class="off-screen-menu">
-      <a href="minhaConta.html">
+      <a href="minhaConta.php">
         <img class="user-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVFJREFUSEvVVcFthDAQnOmE64SrJKGBwBfyuLtHji+kgaOT0EmoJBstMidjjI1QeMQS4mGxM7O7MxAHHx5cH5sAiloSETwApAAGfUjcmpJ9jGAUoPiQV+FY3D2DEN1nyVsIJAhQ1JKK4EsLCHHVYqrmB3ih4GqUZCElQYC8lgcEqmAsbjO1lPVtxfOaijDAXb4BJCROTUnt/fOYuej90FY8/TmAFszvIvpuK64SjSnQ/qe+Fr3VchnnQHRtyWyXArsN08Y4QwaJ8+4hK6snUw9FCrLmnd3uNZ0+PNRoMafG7oNDNu3ReNBn4WRdUSH6kJu9AMbBGg9JjKG512zyOnoBYMdDKAp0LkpABJdJoW+jFgC5cW9sv+0FsLPJdfUMYGu+uG2zt8w15QxgCrct++0BmZJ3Fn5zgEC4xYa9Fn4uQDS8QkC+8Iv+0WLMY/f/H+AXOg3LGaNmGQsAAAAASUVORK5CYII="/>
       </a>
 
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="#contato">Contato</a></li>
         <li>
           <button class="btn button">
-            <a href="login.html">Acessar/Cadastrar</a>
+            <a href="login.php">Acessar/Cadastrar</a>
           </button>
         </li>
       </ul>
@@ -50,7 +50,7 @@
   <div class="main" id="home">
     <div class="box-busca">
       <div class="search-box">
-        <form method="GET" action="buscaProduto.html">
+        <form method="GET" action="buscaProduto.php">
           <input type="text" class="search-box-input" name="busca" placeholder="Faça sua Pesquisa">
           <button class="search-box-button"><!--<i class="search-box-icone icon icon-search"></i>--> <img
               src="/Site-de-redirecionamento-de-PCs/img/lupa.png" alt=""></button>
@@ -75,7 +75,7 @@
         <!-- Wrapper-->
         <div class="carousel-inner">
           <div class="item active">
-            <a href="produto.html" target="_blank">
+            <a href="produto.php" target="_blank">
               <img class="img" src="/Site-de-redirecionamento-de-PCs/img/note-1.png" alt="trybe_photo" style="width: 50%;">
             </a>
           </div>

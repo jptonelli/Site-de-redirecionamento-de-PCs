@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Site-de-redirecionamento-de-PCs/css/style.css">
     <link rel="stylesheet" href="/Site-de-redirecionamento-de-PCs/css/login.css">
+    <link rel="stylesheet" href="/Site-de-redirecionamento-de-PCs/css/cadastro.css">
     <link rel="stylesheet" href="/Site-de-redirecionamento-de-PCs/css/cabecalho.css">
     <link rel="stylesheet" href="/Site-de-redirecionamento-de-PCs/css/menu-ham.css">
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,11 +23,11 @@
         </div>
         <div class="off-screen-menu">
           <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="#contato">Contato</a></li>
             <li>
-              <button class="btn button2">
-                <a href="login.html">Acessar/Cadastrar</a>
+              <button class="btn button">
+                <a href="login.php">Acessar/Cadastrar</a>
             </li>
             </button>
           </ul>
@@ -42,29 +43,36 @@
       </div>
 
     <div class="main">
-        <div class="login">
-            <h4 class="title" id="letter"></h4>
-            <h6>Informe seus dados para se conectar</h6>
+        <div class="cadastrar">        
             <form action="" method="POST" class="form">
-                <label for="user" class="form-label">Usuário</label>
-                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                <label for="name" class="form-label">Nome Completo</label>
+                <input type="text" id="name" class="form-control" placeholder="Digite seu nome">
                 <br>
-    
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha">
-    
-                <input type="submit" value="ACESSAR CONTA" class="btn btn-primary button"/>
+
+                <label for="CPF" class="form-label">CPF</label>
+                <input type="text" id="cpf" class="form-control" placeholder="Digite seu CPF">
+                <br>
+
+                <label for="user" class="form-label">Usuário</label>
+                <input type="text" id="user" class="form-control" placeholder="Crie um usuário">
+                <br>
+
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" id="password" class="form-control" placeholder="Digite seu senha">
+                <br>
+
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail">
+                <br>
+
+                <label for="nascimento" class="form-label">Data de Nascimento</label>
+                <input type="date" id="nascimento" class="form-control" placeholder="dd/mm/aaaa">
+                <br>
+
+                <input type="submit" value="ATUALIZAR DADOS" class="btn btn-success button" />
             </form>
         </div>
-
-        <div class="cadastro">
-            <h4 class="title" id="letter2"></h4>
-            <h6>Crie sua conta clicando no botão abaixo</h6>
-
-            <form action="cadastro.html" method="GET" class="form">    
-                <input type="submit" value="CRIE SUA CONTA" class="btn btn-success button" />
-            </form>
-        </div>
+            
     </div>
 </body>
 </html>

@@ -29,11 +29,11 @@
               </a>
 
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="#contato">Contato</a></li>
                 <li>
                     <button class="btn button">
-                        <a href="login.html">Acessar/Cadastrar</a>
+                        <a href="login.php">Acessar/Cadastrar</a>
                 </li>
                 </button>
             </ul>
