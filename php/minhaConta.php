@@ -49,8 +49,9 @@ $sql = "SELECT nome, CPF, usuario, senha, email, data_de_nascimento FROM usuario
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $_SESSION['id_usu']);
 $stmt->execute();
+$stmt->store_result(); // Armazena o resultado para poder verificar o número de linhas
 $stmt->bind_result($nome, $cpf, $usuario, $senha, $email, $nascimento);
-$stmt->fetch();
+$stmt->fetch(); // Captura o resultado
 $stmt->close();
 
 $conn->close();

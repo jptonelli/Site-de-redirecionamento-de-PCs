@@ -11,15 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($user) || empty($senha)) {
         $error_message = "Usuário ou senha não podem estar vazios.";
     } else {
-        $sql = "SELECT * FROM usuarios WHERE usuario = ? AND senha = ?";
+        $sql = "SELECT id_usu FROM usuarios WHERE usuario = ? AND senha = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $user, $senha);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
             $_SESSION['loggedin'] = true;
-            $_SESSION['user'] = $user; // Você pode armazenar mais dados do usuário, se desejar
+            $_SESSION['user'] = $user;
+            $_SESSION['id_usu'] = $row['id_usu']; // Adiciona o ID do usuário à sessão
             header("Location: minhaConta.php");
             exit();
         } else {

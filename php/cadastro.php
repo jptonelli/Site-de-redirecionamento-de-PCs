@@ -17,27 +17,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($nome) || empty($cpf) || empty($usuario) || empty($senha) || empty($email) || empty($nascimento)) {
         $error_message = "Todos os campos são obrigatórios.";
     } else {
-        // Inserir no banco de dados
-        $sql = "INSERT INTO usuarios (nome, CPF, usuario, senha, email, data_de_nascimento) VALUES (?, ?, ?, ?, ?, ?)";
+        // Verifica se o usuário já existe
+        $sql = "SELECT id_usu FROM usuarios WHERE usuario=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssss", $nome, $cpf, $usuario, $senha, $email, $nascimento);
-
-        if ($stmt->execute()) {
-            // Guarda os dados na sessão
-            $_SESSION['loggedin'] = true;
-            $_SESSION['id_usu'] = $stmt->insert_id;
-            $_SESSION['nome'] = $nome;
-            $_SESSION['usuario'] = $usuario;
-            $_SESSION['email'] = $email;
-
-            // Redireciona para a página de minhaConta
-            header("Location: minhaConta.php");
-            exit;
+        $stmt->bind_param("s", $usuario);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $error_message = "Usuário já existe. Por favor, escolha outro.";
         } else {
-            $error_message = "Erro ao criar a conta: " . $stmt->error;
-        }
+            // Inserir no banco de dados
+            $sql = "INSERT INTO usuarios (nome, CPF, usuario, senha, email, data_de_nascimento) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssss", $nome, $cpf, $usuario, $senha, $email, $nascimento);
 
-        $stmt->close();
+            if ($stmt->execute()) {
+                // Guarda os dados na sessão
+                $_SESSION['loggedin'] = true;
+                $_SESSION['id_usu'] = $stmt->insert_id;
+                $_SESSION['nome'] = $nome;
+                $_SESSION['usuario'] = $usuario;
+                $_SESSION['email'] = $email;
+
+                // Redireciona para a página de minhaConta
+                header("Location: minhaConta.php");
+                exit;
+            } else {
+                $error_message = "Erro ao criar a conta: " . $stmt->error;
+            }
+
+            $stmt->close();
+        }
     }
 }
 
@@ -63,25 +73,7 @@ $conn->close();
     <title>Cadastro</title>
 </head>
 <body>
-    <div id="cabecalho">
-        <div class="logo" style="margin-left: 45px;">
-          <p style="color: #6F86FF;">Chip <span style="color: #fff;">Chase</span></p>
-        </div>
-        <div class="off-screen-menu">
-          <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="#contato">Contato</a></li>
-            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
-            <li><a href="minhaConta.php">minhaConta</a></li>
-            <?php else: ?>
-            <li>
-              <button class="btn button">
-                <a href="login.php">Acessar/Cadastrar</a>
-              </button>
-            </li>
-            <?php endif; ?>
-          </ul>
-        </div>
+<?php include 'cabecalho.php'; ?>
     
         <nav>
           <div class="ham-menu">
@@ -95,15 +87,16 @@ $conn->close();
         <div class="cadastrar">        
             <form action="cadastro.php" method="POST" class="form">
                 <label for="name" class="form-label">Nome Completo</label>
-                <input type="text" id="name" name="name" class="form-control" placeholder="Digite seu nome" required>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Digite seu nome" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>" required>
                 <br>
 
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="Digite seu CPF" required>
+                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="Digite seu CPF" value="<?php echo isset($_POST['cpf']) ? htmlspecialchars($_POST['cpf']) : ''; ?>" required>
                 <br>
 
                 <label for="user" class="form-label">Usuário</label>
-                <input type="text" id="user" name="user" class="form-control" placeholder="Crie um usuário" required>
+                <input type="text" id="user" name="user" class="form-control" placeholder="Crie um usuário" value="<?php echo isset($_POST['user']) ? htmlspecialchars($_POST['user']) : ''; ?>" required>
+                
                 <br>
 
                 <label for="password" class="form-label">Senha</label>
@@ -111,22 +104,21 @@ $conn->close();
                 <br>
 
                 <label for="email" class="form-label">E-mail</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail" required>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
                 <br>
 
                 <label for="nascimento" class="form-label">Data de Nascimento</label>
-                <input type="date" id="nascimento" name="nascimento" class="form-control" placeholder="dd/mm/aaaa" required>
-                <br>
-
-                <?php
-                if (!empty($error_message)) {
+                <input type="date" id="nascimento" name="nascimento" class="form-control" placeholder="dd/mm/aaaa" value="<?php echo isset($_POST['nascimento']) ? htmlspecialchars($_POST['nascimento']) : ''; ?>" required>
+<br>
+<?php
+                if (!empty($error_message) && strpos($error_message, 'Usuário já existe') !== false) {
                     echo '<p style="color: red;">' . htmlspecialchars($error_message) . '</p>';
                 }
                 ?>
 
-                <input type="submit" value="CRIAR CONTA" class="btn btn-success button" />
-            </form>
-        </div>
-    </div>
+<input type="submit" value="CRIAR CONTA" class="btn btn-success button" />
+</form>
+</div>
+</div>
 </body>
 </html>
