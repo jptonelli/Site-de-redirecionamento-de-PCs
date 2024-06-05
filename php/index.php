@@ -23,10 +23,11 @@
   <div class="main" id="home">
     <div class="box-busca">
       <div class="search-box">
-        <form method="GET" action="buscaProduto.php">
+        <form method="GET" action="buscaProduto.php" class="search-box">
           <input type="text" class="search-box-input" name="busca" placeholder="Faça sua Pesquisa">
-          <button class="search-box-button"><!--<i class="search-box-icone icon icon-search"></i>--> <img
-              src="/Site-de-redirecionamento-de-PCs/img/lupa.png" alt=""></button>
+          <button type="submit" class="search-box-button">
+            <img src="/Site-de-redirecionamento-de-PCs/img/lupa.png" alt="">
+          </button>
         </form>
       </div>
     </div>
