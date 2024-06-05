@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($user) || empty($senha)) {
         $error_message = "Usuário ou senha não podem estar vazios.";
     } else {
-        $sql = "SELECT id_usu FROM usuarios WHERE usuario = ? AND senha = ?";
+        // Modifique a consulta para também selecionar a hierarquia do usuário
+        $sql = "SELECT id_usu, hierarquia FROM usuarios WHERE usuario = ? AND senha = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $user, $senha);
         $stmt->execute();
@@ -22,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['loggedin'] = true;
             $_SESSION['user'] = $user;
             $_SESSION['id_usu'] = $row['id_usu']; // Adiciona o ID do usuário à sessão
+            $_SESSION['hierarquia'] = $row['hierarquia']; // Adiciona a hierarquia à sessão
             header("Location: minhaConta.php");
             exit();
         } else {
@@ -31,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>

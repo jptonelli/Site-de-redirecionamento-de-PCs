@@ -19,26 +19,7 @@
 </head>
 
 <body>
-    <div id="cabecalho">
-        <div class="logo" style="margin-left: 45px;">
-            <p style="color: #6F86FF;">Chip <span style="color: #fff;">Chase</span></p>
-        </div>
-        <div class="off-screen-menu">
-            <a href="editaProduto.php">
-                <img class="user-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAQlJREFUSEvVlb0RgzAMRj9tkmwCm4QJoIUUCQ20kAXIJmEUNlFOd5gTBIzNTxE6OPs960O2CSc/dDIfhwnikhsGuldKuV70SJCUHDCjAXCxVUaEsEqpNWMEDsZN3pnw1JKRIC74AyDwgSclX5gh84ZFaclUwAKvM3KKTuBVSt1UQoyoutNbWJsFfSxBH9cgIUZu4JsFOnMAnZHMRetdwQRumF2d0XW3YAEOnflU4lyBK1xaXbewk8AHLi2ru3BV4AqXaOKCf9p8XdBPGm1/1ef6+yEC2w/dLbDBN0fkc5xvquDvBKvHtUNFbZ1RaMbNXTiPtTvBIpGDL1rcyQ6r8x7idLF4U9WE0wVfheXhGWIwFvcAAAAASUVORK5CYII="/>
-              </a>
-
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#contato">Contato</a></li>
-                <li>
-                    <button class="btn button">
-                        <a href="login.php">Acessar/Cadastrar</a>
-                    </button>
-                </li>
-            </ul>
-        </div>
-
+    <?php include 'cabecalho.php'; ?>
         <nav>
             <div class="ham-menu">
                 <span></span>
@@ -49,6 +30,16 @@
     </div>
 
     <main class="main teste">
+    <div class="box-busca">
+      <div class="search-box">
+        <form method="GET" action="buscaProduto.php" class="search-box">
+          <input type="text" class="search-box-input" name="busca" placeholder="Faça sua Pesquisa">
+          <button type="submit" class="search-box-button">
+            <img src="/Site-de-redirecionamento-de-PCs/img/lupa.png" alt="">
+          </button>
+        </form>
+      </div>
+    </div>
         <div class="container bg-trasparent my-4 p-3 cartao" style="position: relative;">
             <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
                 <?php
@@ -86,15 +77,15 @@
                         echo "<div class='card h-100 shadow-sm'>";
                         // Referencia o caminho da imagem
                         $imagem_src = $row['imagem'];
-                        echo "<img src='" . $imagem_src . "' class='card-img-top' alt='Produto'>";
+                        echo "<img src='" . $imagem_src . "' class='card-img-top' alt='Produto' style='width: 800px; height: 400px;'>";
                         echo "<div class='card-body'>";
                         echo "<div class='clearfix mb-3'>";
                         echo "<span class='float-start badge rounded-pill bg-primary'>" . $row['tipo'] . "</span>";
-                        echo "<span class='float-end price-hp'>" . $row['preco'] . "&euro;</span>";
                         echo "</div>";
-                        echo "<h5 class='card-title'>" . $row['nome_prod'] . "</h5>";
+                        echo "<h3 class='card-title'>" . $row['nome_prod'] . "</h3>";
                         echo "<p class='card-text'>" . $row['descricao'] . "</p>";
                         echo "<div class='text-center my-4'>";
+                        echo "<span class='float-end price-hp'>" . $row['preco'] . "&real;</span><br>";
                         echo "<a href='" . $row['link_produto'] . "' class='btn btn-warning'>Ver oferta</a>";
                         echo "</div>";
                         echo "</div>";
@@ -102,7 +93,8 @@
                         echo "</div>";
                     }
                 } else {
-                    echo "<p>Nenhum produto encontrado.</p>";
+                    // Mostra mensagem em branco
+                    echo "<p style='color: white;'>Nenhum produto encontrado.</p>";
                 }
 
                 // Fecha a conexão com o banco de dados
