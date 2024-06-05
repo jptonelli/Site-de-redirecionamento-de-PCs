@@ -31,7 +31,9 @@
         </form>
       </div>
     </div>
-
+    <div class="slogan" id="slogan">
+      <h3 class="slogan-frase">Aqui te redirecionamos para os melhores sites com os melhores preços</h3>
+    </div>
     <div class="promocional">
       <img src="/Site-de-redirecionamento-de-PCs/img/promo.jpg" alt="promoção" class="promocao">
     </div>

@@ -4,9 +4,9 @@ include 'db_connect.php';
 $error_message = "";
 $success_message = "";
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM produtos WHERE id = ?";
+if (isset($_GET['id_prod'])) {
+    $id = $_GET['id_prod'];
+    $sql = "SELECT * FROM produtos WHERE id_prod = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
     $produto = $result->fetch_assoc();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nome = $_POST['nome'];
         $descricao = $_POST['descricao'];
         $preco = $_POST['preco'];
         $link = $_POST['link'];
@@ -33,9 +34,9 @@ if (isset($_GET['id'])) {
             $target_file = $produto['imagem'];
         }
 
-        $sql = "UPDATE produtos SET descricao = ?, preco = ?, imagem = ?, link_produto = ? WHERE id = ?";
+        $sql = "UPDATE produtos SET nome_prod = ?, descricao = ?, preco = ?, imagem = ?, link_produto = ? WHERE id_prod = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sdssi", $descricao, $preco, $target_file, $link, $id);
+        $stmt->bind_param("ssdssi",$nome, $descricao, $preco, $target_file, $link, $id);
         if ($stmt->execute()) {
             $success_message = "Produto atualizado com sucesso!";
             header("Location: editaProduto.php");
@@ -68,7 +69,12 @@ if (isset($_GET['id'])) {
         echo "<div class='alert alert-success'>$success_message</div>";
     }
     ?>
-    <form action="editar_produto.php?id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
+    <form action="editar_produto.php?id_prod=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
+
+    <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($produto['nome_prod']); ?>" required>
+        </div>
         <div class="form-group">
             <label for="descricao">Descrição</label>
             <input type="text" class="form-control" id="descricao" name="descricao" value="<?php echo htmlspecialchars($produto['descricao']); ?>" required>
