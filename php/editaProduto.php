@@ -5,9 +5,11 @@ $error_message = "";
 $success_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $imagem = $_FILES['imagem'];
+    $link = $_POST['link'];
 
     // Validação básica
     if (empty($descricao) || empty($preco) || empty($imagem['name'])) {
@@ -23,10 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Mover o arquivo para o diretório de destino
             if (move_uploaded_file($imagem["tmp_name"], $target_file)) {
                 // Inserir no banco de dados
-                $sql = "INSERT INTO produtos (descricao, preco, imagem) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO produtos (nome_prod,descricao, preco, imagem, link_produto) VALUES (?,?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 // Vincular os parâmetros
-                $stmt->bind_param("sds", $descricao, $preco, $target_file);
+                $stmt->bind_param("ssdss",$nome, $descricao, $preco, $target_file, $link);
                 if ($stmt->execute()) {
                     $success_message = "Produto adicionado com sucesso!";
                 } else {
@@ -41,8 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-?>
 
+// Lógica para buscar produtos do banco de dados
+$buscar = "";
+if (isset($_GET["localizar"])) {
+    $buscar = $_GET["localizar"];
+}
+$sql = "SELECT * FROM produtos WHERE descricao LIKE ?";
+$stmt = $conn->prepare($sql);
+$likeBuscar = "%$buscar%";
+$stmt->bind_param("s", $likeBuscar);
+$stmt->execute();
+$rs = $stmt->get_result();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,12 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-6">
                 <div class="input-group mb-3">
                     <form method="GET" action="">
-                        <input type="text" class="form-control"
-                                name="localizar" 
-                                placeholder="Procure Aqui"
-                            />
-                        <input style="margin-top: 10px" type="submit" class="input-group-text" 
-                                value="BUSCAR"/>
+                        <input type="text" class="form-control" name="localizar" placeholder="Procure Aqui" value="<?php echo htmlspecialchars($buscar); ?>" />
+                        <input style="margin-top: 10px" type="submit" class="input-group-text" value="BUSCAR"/>
                     </form>
                 </div>
                 <button id="adicionarBtn" class="btn btn-success">+ Adicionar</button>
@@ -107,7 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mb-3">
                         <label for="nome" class="form-label" style="color:#fff">Nome do Produto</label>
                         <input type="text" class="form-control" id="nome" name="nome" value="<?php echo isset($_POST['nome']) ? htmlspecialchars($_POST['nome']) : ''; ?>" required>
-
                     </div>
                     <div class="mb-3">
                         <label for="descricao" class="form-label" style="color:#fff">Descrição</label>
@@ -118,10 +126,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="number" step="0.01" class="form-control" id="preco" name="preco" value="<?php echo isset($_POST['preco']) ? htmlspecialchars($_POST['preco']) : ''; ?>" required>
                     </div>
                     <div class="mb-3">
-                        <label for="imagem" class="form-label" style="color:#fff">Imagem do Produto</label>
-                        <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*" required>
+                        <label for="link" class="form-label" style="color:#fff">Link</label>
+                        <input type="text" class="form-control" id="link" name="link" value="<?php echo isset($_POST['link']) ? htmlspecialchars($_POST['link']) : ''; ?>" required>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="imagem" class="form-label" style="color:#fff">Imagem do Produto</label>
+                        <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*"
+                        required>
+                    </div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </form>
             </div>
@@ -130,28 +142,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <td style="color:#fff">Imagem</td>
-                            <td style="color:#fff">Computador</td>
-                            <td style="color:#fff">Descrição</td>
-                            <td style="color:#fff">Preço</td>
-                            <td style="color:#fff">Editar</td>
-                            <td style="color:#fff">Excluir</td>
+                            <th style="color:#fff">Imagem</th>
+                            <th style="color:#fff">Nome</th>
+                            <th style="color:#fff">Descrição</th>
+                            <th style="color:#fff">Preço</th>
+                            <th style="color:#fff">Link</th>
+                            <th style="color:#fff">Editar</th>
+                            <th style="color:#fff">Excluir</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        /*
-                            while($linha = $rs->fetch_assoc()) {
-                                echo "  <tr>
-                                            <td>" . $linha["id"] . "</td>
-                                            <td>" . $linha["usuario"] . "</td>
-                                            <td>
-                                                <a href='login_alterar.php?id=" . $linha["id"] . "' style='text-decoration:none'>✏️</a>
-                                                <a href='login_excluir.php?id=" . $linha["id"] . "' class='btn btn-danger'>🗑️</a>
-                                            </td>
-                                        </tr>";
-                            }
-                        */
+                        // Exibir produtos na tabela
+                        while ($linha = $rs->fetch_assoc()) {
+                            echo "<tr>
+                                    <td><img src='" . htmlspecialchars($linha["imagem"]) . "' alt='Produto' style='width: 100px; height: auto;'></td>
+                                    <td style='color:#fff'>" . htmlspecialchars($linha["nome_prod"]) . "</td>
+                                    <td style='color:#fff'>" . htmlspecialchars($linha["descricao"]) . "</td>
+                                    <td style='color:#fff'>R$ " . number_format($linha["preco"], 2, ',', '.') . "</td>
+                                    <td style='color:#fff'><a href='" . htmlspecialchars($linha["link_produto"]) . "' target='_blank'>Link</a></td>
+                                    <td><a href='editar_produto.php?id=" . $linha["id_prod"] . "' class='text-decoration-none'>✏️</a></td>
+                                    <td><a href='excluir_produto.php?id=" . $linha["id_prod"] . "' class='btn btn-danger'>🗑️</a></td>
+                                  </tr>";
+                        }
+                        $stmt->close();
+                        $conn->close();
                         ?>
                     </tbody>
                 </table>
