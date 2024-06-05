@@ -72,9 +72,7 @@ CREATE TABLE produtos (
     id_usu INT,
     descricao VARCHAR(255),
     nome_prod VARCHAR(255),
-    tipo VARCHAR(255),
     preco DECIMAL(10, 2),
     link_produto VARCHAR(255),
-    opcao_pagamento VARCHAR(255),
     FOREIGN KEY (id_usu) REFERENCES usuarios(id_usu)
 );

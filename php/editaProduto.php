@@ -1,5 +1,14 @@
 <?php
+session_start();
 include 'db_connect.php';
+
+// Verificar se o usuário está logado
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header("Location: login.php");
+    exit;
+}
+
+$id_usu = $_SESSION['id_usu'];  // ID do usuário logado
 
 $error_message = "";
 $success_message = "";
@@ -25,10 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Mover o arquivo para o diretório de destino
             if (move_uploaded_file($imagem["tmp_name"], $target_file)) {
                 // Inserir no banco de dados
-                $sql = "INSERT INTO produtos (nome_prod, descricao, preco, imagem, link_produto) VALUES (?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO produtos (nome_prod, descricao, preco, imagem, link_produto, id_usu) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 // Vincular os parâmetros
-                $stmt->bind_param("ssdss", $nome, $descricao, $preco, $target_file, $link);
+                $stmt->bind_param("ssdssi", $nome, $descricao, $preco, $target_file, $link, $id_usu);
                 if ($stmt->execute()) {
                     $success_message = "Produto adicionado com sucesso!";
                 } else {
@@ -67,7 +76,6 @@ if (!empty($params)) {
 $stmt->execute();
 $rs = $stmt->get_result();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

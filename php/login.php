@@ -11,21 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($user) || empty($senha)) {
         $error_message = "Usuário ou senha não podem estar vazios.";
     } else {
-        // Modifique a consulta para também selecionar a hierarquia do usuário
-        $sql = "SELECT id_usu, hierarquia FROM usuarios WHERE usuario = ? AND senha = ?";
+        // Seleciona o usuário com base no nome de usuário
+        $sql = "SELECT id_usu, senha, hierarquia FROM usuarios WHERE usuario = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $user, $senha);
+        $stmt->bind_param("s", $user);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['user'] = $user;
-            $_SESSION['id_usu'] = $row['id_usu']; // Adiciona o ID do usuário à sessão
-            $_SESSION['hierarquia'] = $row['hierarquia']; // Adiciona a hierarquia à sessão
-            header("Location: minhaConta.php");
-            exit();
+            // Verifica se a senha fornecida corresponde ao hash no banco de dados
+            if (password_verify($senha, $row['senha'])) {
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user'] = $user;
+                $_SESSION['id_usu'] = $row['id_usu']; // Adiciona o ID do usuário à sessão
+                $_SESSION['hierarquia'] = $row['hierarquia']; // Adiciona a hierarquia à sessão
+                header("Location: minhaConta.php");
+                exit();
+            } else {
+                $error_message = "Usuário ou senha inválidos.";
+            }
         } else {
             $error_message = "Usuário ou senha inválidos.";
         }

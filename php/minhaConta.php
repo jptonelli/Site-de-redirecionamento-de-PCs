@@ -17,18 +17,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['name'];
     $cpf = $_POST['cpf'];
     $usuario = $_POST['user'];
-    $senha = $_POST['password'];
     $email = $_POST['email'];
     $nascimento = $_POST['nascimento'];
 
+    // Verifica se o campo de senha foi preenchido
+    if (!empty($_POST['password'])) {
+        $senha = $_POST['password'];
+        // Cria o hash da senha
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    }
+
     // Validação básica
-    if (empty($nome) || empty($cpf) || empty($usuario) || empty($senha) || empty($email) || empty($nascimento)) {
+    if (empty($nome) || empty($cpf) || empty($usuario) || empty($email) || empty($nascimento)) {
         $error_message = "Todos os campos são obrigatórios.";
     } else {
         // Atualiza no banco de dados
-        $sql = "UPDATE usuarios SET nome=?, CPF=?, usuario=?, senha=?, email=?, data_de_nascimento=? WHERE id_usu=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssi", $nome, $cpf, $usuario, $senha, $email, $nascimento, $_SESSION['id_usu']);
+        if (!empty($_POST['password'])) {
+            $sql = "UPDATE usuarios SET nome=?, CPF=?, usuario=?, senha=?, email=?, data_de_nascimento=? WHERE id_usu=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssssi", $nome, $cpf, $usuario, $senha_hash, $email, $nascimento, $_SESSION['id_usu']);
+        } else {
+            // Se o campo de senha não foi preenchido, mantém a senha existente
+            $sql = "UPDATE usuarios SET nome=?, CPF=?, usuario=?, email=?, data_de_nascimento=? WHERE id_usu=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssssi", $nome, $cpf, $usuario, $email, $nascimento, $_SESSION['id_usu']);
+        }
 
         if ($stmt->execute()) {
             // Atualiza os dados na sessão
@@ -45,12 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Carrega os dados do usuário do banco de dados
-$sql = "SELECT nome, CPF, usuario, senha, email, data_de_nascimento FROM usuarios WHERE id_usu=?";
+$sql = "SELECT nome, CPF, usuario, email, data_de_nascimento FROM usuarios WHERE id_usu=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $_SESSION['id_usu']);
 $stmt->execute();
 $stmt->store_result(); // Armazena o resultado para poder verificar o número de linhas
-$stmt->bind_result($nome, $cpf, $usuario, $senha, $email, $nascimento);
+$stmt->bind_result($nome, $cpf, $usuario, $email, $nascimento);
 $stmt->fetch(); // Captura o resultado
 $stmt->close();
 

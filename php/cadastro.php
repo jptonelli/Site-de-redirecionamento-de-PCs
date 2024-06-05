@@ -26,10 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->num_rows > 0) {
             $error_message = "Usuário já existe. Por favor, escolha outro.";
         } else {
+            // Hash da senha
+            $senha_hashed = password_hash($senha, PASSWORD_BCRYPT);
+
             // Inserir no banco de dados
             $sql = "INSERT INTO usuarios (nome, CPF, usuario, senha, email, data_de_nascimento) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssss", $nome, $cpf, $usuario, $senha, $email, $nascimento);
+            $stmt->bind_param("ssssss", $nome, $cpf, $usuario, $senha_hashed, $email, $nascimento);
 
             if ($stmt->execute()) {
                 // Guarda os dados na sessão
