@@ -86,7 +86,7 @@
                         echo "<p class='card-text'>" . $row['descricao'] . "</p>";
                         echo "<div class='text-center my-4'>";
                         echo "<span class='float-end price-hp'>" . $row['preco'] . "&real;</span><br>";
-                        echo "<a href='" . $row['link_produto'] . "' class='btn btn-warning'>Ver oferta</a>";
+                        echo "<a href='" . $row['link_produto'] . "' class='btn btn-warning' target='_blank'>Ver oferta</a>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";
