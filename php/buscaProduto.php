@@ -80,7 +80,6 @@
                         echo "<img src='" . $imagem_src . "' class='card-img-top' alt='Produto' style='width: 800px; height: 400px;'>";
                         echo "<div class='card-body'>";
                         echo "<div class='clearfix mb-3'>";
-                        echo "<span class='float-start badge rounded-pill bg-primary'>" . $row['tipo'] . "</span>";
                         echo "</div>";
                         echo "<h3 class='card-title'>" . $row['nome_prod'] . "</h3>";
                         echo "<p class='card-text'>" . $row['descricao'] . "</p>";
